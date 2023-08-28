@@ -3,7 +3,6 @@ import React, { useState } from "react";
 //import React from "react";
 
 function Form(props) {
-  
   const [inicialEstadoFormulario, setinicialEstadoFormulario] = useState({
     lugar: "",
     categoria: "",
@@ -28,8 +27,7 @@ function Form(props) {
     ///console.log(formulario.fechaFin);
 
     try {
-      const result = await props.contrato.methods
-        .crearRegistro(
+      const result = await props.contrato.methods.crearRegistro(
           formulario.categoria,
           formulario.fechaInicio,
           formulario.fechaFin,
