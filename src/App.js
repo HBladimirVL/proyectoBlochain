@@ -1,6 +1,6 @@
 import Navbar from "./components/Navbar";
 import Form from "./components/form";
-import listarRegistro from "./components/ListarRegistro";
+import ListarRegistro from "./components/listarRegistro";
 import smartContract from "./smartContract/registro.json";
 import { useEffect, useState } from "react";
 import Web3 from "web3";
@@ -14,22 +14,22 @@ function App() {
   const [listarInformacionEstudios, setListarInformacionEstudios] = useState(
     []
   );
-  console.log("listarInformacionEstudios ==> ", listarInformacionEstudios);
+  //console.log("listarInformacionEstudios ==> ", listarInformacionEstudios);
 
   const listarRegistro = async () => {
-    console.log("contract==>", contract);
+   // console.log("contract==>", contract);
     if (contract) {
       try {
         const contadorRegistro = await contract.methods
           .registroCounter()
           .call();
-        console.log("contadorRegistro ==>", contadorRegistro);
+        //console.log("contadorRegistro ==>", contadorRegistro);
 
         let arrayEstudio = [];
 
         for (let i = 1; i <= contadorRegistro; i++) {
           const inforestudio = await contract.methods.estudios(i).call();
-          console.log(inforestudio);
+         // console.log(inforestudio);
           if (inforestudio.categoria != "") {
             const estudio = {
               categoria: inforestudio.categoria,
@@ -69,7 +69,7 @@ function App() {
     Wallet();
   }, []);
 
-  console.log(smartContract);
+  //console.log(smartContract);
 
   const conectarWallet = async () => {
     if (typeof window.ethereum !== "undefined") {
@@ -113,8 +113,9 @@ function App() {
           ></Navbar>
 
           <Form contrato={contract} direccion={account}></Form>
-          <listarRegistro listarInformacionEstudios={listarInformacionEstudios}
-          ></listarRegistro>
+          <ListarRegistro
+            listarInformacionEstudios={listarInformacionEstudios}
+          ></ListarRegistro>
         </>
       ) : (
         <h1>Intalar Wallet</h1>
